@@ -758,11 +758,28 @@ hicovid$propcases &lt;- summary(dta$propcases)[5] # 75th percentile
 maxcovid &lt;- b.m5$model
 maxcovid$propcases &lt;- max(dta$propcases)
 
-b.0 &lt;- sum(predict(b.m5, newdata = nocovid, type = &quot;response&quot;))
-b.l &lt;- sum(predict(b.m5, newdata = locovid, type = &quot;response&quot;))
-b.m &lt;- sum(predict(b.m5, type = &quot;response&quot;))
-b.h &lt;- sum(predict(b.m5, newdata = hicovid, type = &quot;response&quot;))
-b.x &lt;- sum(predict(b.m5, newdata = maxcovid, type = &quot;response&quot;))
+mikecovid &lt;- b.m5$model
+mikecovid$propcases &lt;- 3
+
+b.vec &lt;-
+  c(sum(predict(
+    b.m5, newdata = nocovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    b.m5, newdata = locovid, type = &quot;response&quot;
+  )),
+  sum(predict(b.m5, type = &quot;response&quot;)),
+  sum(dta$biden),
+  sum(predict(
+    b.m5, newdata = hicovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    b.m5, newdata = maxcovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    b.m5, newdata = mikecovid, type = &quot;response&quot;
+  )))
+
 
 
 # these matrices are idential to above except for the first column
@@ -779,35 +796,91 @@ hicovid$propcases &lt;- summary(dta$propcases)[5] # 75th percentile
 maxcovid &lt;- t.m5$model
 maxcovid$propcases &lt;- max(dta$propcases)
 
-t.0 &lt;- sum(predict(t.m5, newdata = nocovid, type = &quot;response&quot;))
-t.l &lt;- sum(predict(t.m5, newdata = locovid, type = &quot;response&quot;))
-t.m &lt;- sum(predict(t.m5, type = &quot;response&quot;))
-t.h &lt;- sum(predict(t.m5, newdata = hicovid, type = &quot;response&quot;))
-t.x &lt;- sum(predict(t.m5, newdata = maxcovid, type = &quot;response&quot;))
+mikecovid &lt;- t.m5$model
+mikecovid$propcases &lt;- 3
+
+
+t.vec &lt;-
+  c(sum(predict(
+    t.m5, newdata = nocovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    t.m5, newdata = locovid, type = &quot;response&quot;
+  )),
+  sum(predict(t.m5, type = &quot;response&quot;)),
+  sum(dta$trump),
+  sum(predict(
+    t.m5, newdata = hicovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    t.m5, newdata = maxcovid, type = &quot;response&quot;
+  )),
+  sum(predict(
+    t.m5, newdata = mikecovid, type = &quot;response&quot;
+  )))
 
 out &lt;- data.frame(
-  scenario = c(&quot;Zero&quot;, &quot;Low&quot;, &quot;As-is&quot;, &quot;High&quot;, &quot;Max&quot;),
-  biden = c(b.0, b.l, b.m, b.h, b.x),
-  trump = c(t.0, t.l, t.m, t.h, t.x)
+  scenario = c(&quot;Zero&quot;, &quot;Low&quot;, &quot;As-is&quot;,&quot;Among Respondents&quot;,  &quot;High&quot;, &quot;Max&quot;, &quot;Arbitrary (3)&quot;),
+  biden = b.vec,
+  trump = t.vec
 )
 out$diff &lt;- out$biden - out$trump
 
-out</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-1">
-<col><col><col><col><tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">scenario</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">biden</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">trump</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">diff</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Zero</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.68e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.93e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-2.51e+03</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Low</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.7e+04&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.92e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-2.24e+03</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">As-is</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.73e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.9e+04&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-1.71e+03</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">High</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.74e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.89e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.51e+03</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">Max</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">7.17e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">5.08e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2.09e+04</td></tr>
+kable(out)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">scenario</th>
+<th align="right">biden</th>
+<th align="right">trump</th>
+<th align="right">diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zero</td>
+<td align="right">56769.47</td>
+<td align="right">59278.49</td>
+<td align="right">-2509.0254</td>
+</tr>
+<tr class="even">
+<td align="left">Low</td>
+<td align="right">56951.75</td>
+<td align="right">59188.57</td>
+<td align="right">-2236.8203</td>
+</tr>
+<tr class="odd">
+<td align="left">As-is</td>
+<td align="right">57308.00</td>
+<td align="right">59013.00</td>
+<td align="right">-1705.0000</td>
+</tr>
+<tr class="even">
+<td align="left">Among Respondents</td>
+<td align="right">57968.00</td>
+<td align="right">59941.00</td>
+<td align="right">-1973.0000</td>
+</tr>
+<tr class="odd">
+<td align="left">High</td>
+<td align="right">57440.09</td>
+<td align="right">58946.33</td>
+<td align="right">-1506.2437</td>
+</tr>
+<tr class="even">
+<td align="left">Max</td>
+<td align="right">71696.96</td>
+<td align="right">50786.93</td>
+<td align="right">20910.0305</td>
+</tr>
+<tr class="odd">
+<td align="left">Arbitrary (3)</td>
+<td align="right">57977.94</td>
+<td align="right">58677.15</td>
+<td align="right">-699.2127</td>
+</tr>
+</tbody>
 </table>
-
 </div>
 </div>
 <div id="trump-feeling-thermometer-1-10" class="section level2">
