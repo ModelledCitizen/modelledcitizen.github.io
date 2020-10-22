@@ -921,6 +921,7 @@ out &lt;- data.frame(
 )
 out$diff &lt;- out$biden - out$trump
 
+
 kable(out)</code></pre>
 <table>
 <thead>
@@ -973,6 +974,65 @@ kable(out)</code></pre>
 <td align="right">57977.94</td>
 <td align="right">58677.15</td>
 <td align="right">-699.2127</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>out.pct &lt;- round(rbind(
+  &quot;Zero&quot; = prop.table(c(b.vec[1], t.vec[1])),
+  &quot;Low&quot; = prop.table(c(b.vec[2], t.vec[2])),
+  &quot;As-is&quot; = prop.table(c(b.vec[3], t.vec[3])),
+  &quot;Among Respondents&quot; = prop.table(c(b.vec[4], t.vec[4])),
+  &quot;High&quot; = prop.table(c(b.vec[5], t.vec[5])),
+  &quot;Max&quot; = prop.table(c(b.vec[6], t.vec[6])),
+  &quot;Arbitrary (3)&quot; = prop.table(c(b.vec[7], t.vec[7]))
+) * 100, 2)
+
+out.pct &lt;- as.data.frame(out.pct)
+names(out.pct) &lt;- c(&quot;Biden&quot;, &quot;Trump&quot;)
+kable(out.pct)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Biden</th>
+<th align="right">Trump</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zero</td>
+<td align="right">48.92</td>
+<td align="right">51.08</td>
+</tr>
+<tr class="even">
+<td align="left">Low</td>
+<td align="right">49.04</td>
+<td align="right">50.96</td>
+</tr>
+<tr class="odd">
+<td align="left">As-is</td>
+<td align="right">49.27</td>
+<td align="right">50.73</td>
+</tr>
+<tr class="even">
+<td align="left">Among Respondents</td>
+<td align="right">49.16</td>
+<td align="right">50.84</td>
+</tr>
+<tr class="odd">
+<td align="left">High</td>
+<td align="right">49.35</td>
+<td align="right">50.65</td>
+</tr>
+<tr class="even">
+<td align="left">Max</td>
+<td align="right">58.54</td>
+<td align="right">41.46</td>
+</tr>
+<tr class="odd">
+<td align="left">Arbitrary (3)</td>
+<td align="right">49.70</td>
+<td align="right">50.30</td>
 </tr>
 </tbody>
 </table>
