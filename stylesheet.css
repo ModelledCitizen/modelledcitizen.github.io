@@ -39,19 +39,19 @@ p {
   padding-right: 5%;
 }
 img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.grid-container > div {
- padding: 10px; 
-}
-.item1 {
+.top {
   text-align: left;
+  padding: 0 10;
 }
-.item9 {
+.middle {
+  width: 50%;
+  margin: auto;
+}
+.bottom {
   text-align: right;
+  padding: 0 10;
 }
