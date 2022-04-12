@@ -1,8 +1,6 @@
 body {
   background-color: white;
   color: black;
-  font-family: 'Raleway';
-  font-weight: 300;
 }
 a {
   color: #F55B58;
@@ -73,6 +71,6 @@ img {
   position: fixed;
   bottom: 0;
   left: 50%;
-  width: 22vw;
-  margin-left: -11vw;
+  width: 177px;
+  margin-left: -88.5px;
 }
