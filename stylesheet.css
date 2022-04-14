@@ -1,13 +1,13 @@
 body {
   background-color: white;
-  color: black;
+  color: #dd361c;
 }
 a {
-  color: #F55B58;
+  color: #105bd8;
   text-decoration: none;
 }
 a.main {
-  color: #F55B58;
+  color: #105bd8;
   text-decoration: none;
 }
 a.main:hover {
