@@ -27,6 +27,12 @@ h2 {
     color: #105bd8;
 }
 h3 {
+  font-family: 'Helvetica';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2em;
+}
+h4 {
     font-family: 'Helvetica';
     font-weight: 400;
     font-size: 13px;
@@ -50,10 +56,6 @@ img {
   width: 100%;
   margin: auto;
 }
-span {
-  font-size: 24px;
-}
-
 
 .button {
   padding: 5% 10%;
@@ -94,6 +96,10 @@ span {
 .hero {
   width: 50%;
   margin: auto;
+}
+.big {
+}
+.bigger {
 }
 .footer {
   position: fixed;
