@@ -72,13 +72,20 @@ img {
   width: 20%;
   text-align: right;
 }
+.hero {
+  width: 50%;
+  max-width: 50vh;
+  margin: auto;
+}
 .gridEmoji {
   text-align: center;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  max-width: 100vh;
+  margin: auto;
 }
 .gridElement {
-  font-size: 7.5vw;
+  font-size: min(7.5vw, 6vh);
 }
 .details {
   display: none;
@@ -92,10 +99,6 @@ img {
 }
 .details:hover {
   display: block;
-}
-.hero {
-  width: 50%;
-  margin: auto;
 }
 .big {
 }
