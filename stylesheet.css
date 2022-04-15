@@ -31,6 +31,7 @@ h3 {
   font-weight: 700;
   font-size: 24px;
   line-height: 1.2em;
+  color: #323a45;
 }
 h4 {
     font-family: 'Helvetica';
@@ -48,6 +49,8 @@ p {
 }
 table {
   width: 100%;
+  max-width: 100vh;
+  margin: auto;
 }
 th, td {
   padding: 0 10;
