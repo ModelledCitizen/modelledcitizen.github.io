@@ -79,6 +79,7 @@ img {
   width: 50%;
   max-width: 50vh;
   margin: auto;
+  padding: 5vh 0;
 }
 .gridEmoji {
   text-align: center;
