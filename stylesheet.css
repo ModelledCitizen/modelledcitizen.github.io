@@ -1,14 +1,16 @@
 body {
-  background-color: white;
-  color: black;
+  background-color: #ffffff;
+  color: #212121;
 }
 a {
   color: #105bd8;
   text-decoration: none;
 }
 a:hover {
-  background-color: #105bd8;
-  color: white;
+  color: #aeb0b5;
+}
+a:visited {
+  color: #4c2c92;
 }
 h1 {
     font-family: 'Helvetica';
@@ -110,4 +112,14 @@ img {
   left: 50%;
   width: 196px;
   margin-left: -98px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #212121;
+    color: #ffffff;
+  }
+  h3 {
+    color: #aeb0b5;
+  }
 }
